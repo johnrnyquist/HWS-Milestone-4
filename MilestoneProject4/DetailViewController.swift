@@ -4,7 +4,7 @@ class DetailViewController: UIViewController {
     
     @IBOutlet var imageView: UIImageView!
     
-    var selectedImageName: String?
+    var selectedImagePath: String?
     
     
     //MARK: - UIViewController class
@@ -16,7 +16,7 @@ class DetailViewController: UIViewController {
         //title = selectedImage
         navigationItem.largeTitleDisplayMode = .never // small titles
         
-        if let imageToLoad = selectedImageName {
+        if let imageToLoad = selectedImagePath {
             imageView.image = UIImage(contentsOfFile: imageToLoad)
         }
     }

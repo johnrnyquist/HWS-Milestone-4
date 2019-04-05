@@ -3,9 +3,9 @@ import UIKit
 class ViewController: UITableViewController,
                       UIImagePickerControllerDelegate,
                       UINavigationControllerDelegate {
+    /* UINavigationControllerDelegate is required because we're using UIImagePickerControllerDelegate */
     
     var people = [Person]()
-
     
     //MARK: - ViewController class
     
@@ -30,6 +30,7 @@ class ViewController: UITableViewController,
             let jsonDecoder = JSONDecoder()
             do {
                 people = try jsonDecoder.decode([Person].self, from: savedPeople)
+                print(people.compactMap { ($0.name, $0.imageName) })
             } catch {
                 print("Failed to load people.")
             }
@@ -96,7 +97,7 @@ class ViewController: UITableViewController,
         }
     }
     
-
+    
     //MARK: - UITableViewDataSource protocol
     
     // Tells the data source to return the number of rows in a given section of a table view.
@@ -108,23 +109,21 @@ class ViewController: UITableViewController,
     // Asks the data source for a cell to insert in a particular location of the table view.
     // This class is the data source.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let path = getDocumentsDirectory().appendingPathComponent(people[indexPath.row].imageName)
-
         
         /*  Swift lets us use a question mark – textLabel? –
          to mean “do this only if there is an actual text label there,
          or do nothing otherwise.”   */
         cell.textLabel?.text = people[indexPath.row].name /* indexPath: A list of indexes that together represent the path to a specific location in a tree of nested arrays. */
         cell.imageView?.image = UIImage(contentsOfFile: path.path)
-        print("cell", path.path)
         cell.imageView?.layer.borderWidth = 0.5
         cell.imageView?.layer.borderColor = UIColor.lightGray.cgColor
-
+        
         return cell
     }
-
+    
     
     //MARK: - UITableViewDelegate protocol
     
@@ -134,15 +133,11 @@ class ViewController: UITableViewController,
         if let detailView = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             
             let path = getDocumentsDirectory().appendingPathComponent(people[indexPath.row].imageName)
-            detailView.selectedImageName = path.path
-            print(path.path)
+            detailView.selectedImagePath = path.path
             detailView.title = "\(indexPath.row + 1) of \(people.count)"
+            
             // Pushes a view controller onto the receiver’s stack and updates the display. Note it is animated.
             navigationController?.pushViewController(detailView, animated: true)
         }
     }
-    
-    
-
 }
-
