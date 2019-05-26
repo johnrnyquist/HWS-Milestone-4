@@ -1,4 +1,5 @@
 import UIKit
+import CloudKit
 
 class ViewController: UITableViewController,
                       UIImagePickerControllerDelegate,
@@ -8,6 +9,22 @@ class ViewController: UITableViewController,
     var people = [Person]()
     
     //MARK: - ViewController class
+    
+    func doSubmission(name: String, imageURL: URL) {
+        let whistleRecord = CKRecord(recordType: "Photo")
+        whistleRecord["name"] = name as CKRecordValue
+        
+        let whistleAsset = CKAsset(fileURL: imageURL)
+        whistleRecord["image"] = whistleAsset
+        
+        CKContainer.default().privateCloudDatabase.save(whistleRecord) { record, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print(error)
+                }
+            }
+        }
+    }
     
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -31,6 +48,12 @@ class ViewController: UITableViewController,
             do {
                 people = try jsonDecoder.decode([Person].self, from: savedPeople)
                 print(people.compactMap { ($0.name, $0.imageName) })
+                
+                
+                people.forEach { person in
+                    let imagePath = getDocumentsDirectory().appendingPathComponent(person.imageName)
+                    self.doSubmission(name: person.name, imageURL: imagePath)
+                }
             } catch {
                 print("Failed to load people.")
             }
@@ -38,7 +61,7 @@ class ViewController: UITableViewController,
     }
     
     
-    //MARK: - ViewController class #selectors
+    //MARK: #selectors
     
     @objc func addNewPerson() {
         let picker = UIImagePickerController()

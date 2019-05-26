@@ -14,6 +14,7 @@
 		8D7379F42256881300C3ED42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D7379F22256881300C3ED42 /* LaunchScreen.storyboard */; };
 		8D7379FC2256895400C3ED42 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7379FB2256895400C3ED42 /* DetailViewController.swift */; };
 		8D7379FE2256896400C3ED42 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7379FD2256896400C3ED42 /* Person.swift */; };
+		8DE68806227E2FCB0067E0EC /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE68805227E2FCB0067E0EC /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		8D7379F52256881300C3ED42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7379FB2256895400C3ED42 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8D7379FD2256896400C3ED42 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		8DE68803227E2FA80067E0EC /* MilestoneProject4.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MilestoneProject4.entitlements; sourceTree = "<group>"; };
+		8DE68805227E2FCB0067E0EC /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DE68806227E2FCB0067E0EC /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +48,7 @@
 			children = (
 				8D7379E82256881000C3ED42 /* MilestoneProject4 */,
 				8D7379E72256881000C3ED42 /* Products */,
+				8DE68804227E2FCB0067E0EC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +63,7 @@
 		8D7379E82256881000C3ED42 /* MilestoneProject4 */ = {
 			isa = PBXGroup;
 			children = (
+				8DE68803227E2FA80067E0EC /* MilestoneProject4.entitlements */,
 				8D7379ED2256881000C3ED42 /* Main.storyboard */,
 				8D7379E92256881000C3ED42 /* AppDelegate.swift */,
 				8D7379EB2256881000C3ED42 /* ViewController.swift */,
@@ -68,6 +74,14 @@
 				8D7379F52256881300C3ED42 /* Info.plist */,
 			);
 			path = MilestoneProject4;
+			sourceTree = "<group>";
+		};
+		8DE68804227E2FCB0067E0EC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8DE68805227E2FCB0067E0EC /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,6 +116,14 @@
 				TargetAttributes = {
 					8D7379E52256881000C3ED42 = {
 						CreatedOnToolsVersion = 10.2;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -290,6 +312,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MilestoneProject4/MilestoneProject4.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W8GR9TRDWE;
 				INFOPLIST_FILE = MilestoneProject4/Info.plist;
@@ -308,6 +331,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MilestoneProject4/MilestoneProject4.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W8GR9TRDWE;
 				INFOPLIST_FILE = MilestoneProject4/Info.plist;
